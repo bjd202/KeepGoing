@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.modal-dialog.modal-notify.modal-warning .modal-header {
+	background-color: #fb3;
+}
+
+.modal-notify .modal-header {
+	border-radius: 3px 3px 0 0;
+}
+
+.modal-notify .modal-content {
+	border-radius: 3px;
+}
+
+.modal {
+	z-index: 2000;
+}

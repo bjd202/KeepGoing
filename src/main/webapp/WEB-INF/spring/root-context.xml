@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="dataSource" 
+	class="org.apache.tomcat.jdbc.pool.DataSource" 
+	p:driverClassName="com.mysql.cj.jdbc.Driver"
+	p:url="jdbc:mysql://192.168.219.106:3306/test?serverTimezone=Asia/Seoul"
+	p:username="bjd202"
+	p:password="qkrwhden1234"
+	p:initialSize="2"
+	p:maxActive="10"
+	p:maxIdle="10"
+	p:testWhileIdle="true"
+	p:minEvictableIdleTimeMillis="180000" 
+	p:timeBetweenEvictionRunsMillis="10000"
+	destroy-method="close" />
+	
+	<!-- Google 소셜 로그인 연결 설정 -->
+	<bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
+		<constructor-arg value="844798945875-pf9fkjks61g0cm354knjh60gcslppi71.apps.googleusercontent.com" />
+		<constructor-arg value="Tc4RLyvENx3rwfKdf-O8KqJ9" />
+	</bean>
+
+	
+	<bean id="googleOAuth2Template"
+		class="org.springframework.social.google.connect.GoogleOAuth2Template">
+		<constructor-arg value="998547302914-r9ti4t41mbt0e4q30lded2ic12dckpi1.apps.googleusercontent.com" />
+		<constructor-arg value="1q1HsXuho6Anz8jDrO--RM9a" />
+	</bean>
+
+
+	<bean id="googleOAuth2Parameters"
+		class="org.springframework.social.oauth2.OAuth2Parameters">
+		<property name="scope" value="profile email"></property>
+		<property name="redirectUri"
+			value="http://localhost:8080/webapp/google_callback" />
+	</bean>
+
+	<bean id="authInfo" class="com.tje.api.AuthInfo">
+		<constructor-arg value="998547302914-r9ti4t41mbt0e4q30lded2ic12dckpi1.apps.googleusercontent.com" />
+		<constructor-arg value="1q1HsXuho6Anz8jDrO--RM9a" />
+	</bean>
+	
+	
+	
+</beans>
